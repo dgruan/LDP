@@ -12,25 +12,92 @@ verificarVitoria, que verifica se ainda tem posicoes vazias
 reiniciarJogo, que volta ao estado inicial
 jogador, que mostra dados do jogador */
 
-int menu(){
+int jogador(){
+    struct jogador{
+        char nome[100];
+        int jogadas;
+        int erros;
+    };
+    return jogador;
+}
+int sairJogo(){
 
-    int opc;
+}
+void ajuda(){
+
+}
+int reiniciar(){
+
+}
+int verificarVitoria(){
+
+}
+int jogadaValida(){
+
+}
+int verificarBloco(){
+
+}
+int verificarColuna(){
+
+}
+int verificarLinha(){
+
+}
+int jogada(){
+
+}
+int incializarTabuleiro(){
+    int tabuleiro[9][9];
+    
+    return tabuleiro;
+}
+void menu(){
     printf("========== S U D O K U ==========\n");
     printf("1-Mostrar tabuleiro");
     printf("2-Fazer jogada\n");
     printf("3-Verificar progresso\n");
     printf("4-Estatisticas");
-    printf("5-Reiniciar partida\n");
-    printf("6-Reiniciar\n");
-    printf("7-Ajuda\n");
-    printf("8-Sair\n");
+    printf("5-Reiniciar \n");
+    printf("6-Ajuda\n");
+    printf("7-Sair\n");
     printf("===============================\n==");
-    printf("Digite a opcao desejada: \n");
-    scanf("%d",&opc);
-    return opc;
+    printf("Digite a opcao desejada: ");
 }
 int main(){
 
     int opcao;
+    menu();
+    scanf("%d",&opcao);
+
+    switch(opcao){
+        case 1:
+        incializarTabuleiro();
+        break;
+        
+        case 2:
+        jogada();
+        break;
+
+        case 3:
+
+        break;
+
+        case 4:
+        jogador();
+        break;
+
+        case 5:
+        reiniciar();
+        break;
+
+        case 6:
+        ajuda();
+        break;
+
+        case 7:
+        sairJogo();
+        break;
+    }
     return 0;
 }
