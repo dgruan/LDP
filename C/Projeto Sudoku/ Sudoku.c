@@ -20,38 +20,73 @@ int jogador(){
     };
     return jogador;
 }
+
 int sairJogo(){
 
 }
+
 void ajuda(){
 
 }
+
 int reiniciar(){
 
 }
+
 int verificarVitoria(){
 
 }
+
 int jogadaValida(){
 
 }
+
 int verificarBloco(){
 
 }
+
 int verificarColuna(){
 
 }
+
 int verificarLinha(){
 
 }
+
 int jogada(){
 
 }
-int incializarTabuleiro(){
-    int tabuleiro[9][9];
-    
-    return tabuleiro;
+
+mostrarTabuleiro(){
+    int tabuleiro[9][9] = {
+    {5,3,0,0,7,0,0,0,0},
+    {6,0,0,1,9,5,0,0,0},
+    {0,9,8,0,0,0,0,6,0},
+
+    {8,0,0,0,6,0,0,0,3},
+    {4,0,0,8,0,3,0,0,1},
+    {7,0,0,0,2,0,0,0,6},
+
+    {0,6,0,0,0,0,2,8,0},
+    {0,0,0,4,1,9,0,0,5},
+    {0,0,0,0,8,0,0,7,9} 
+};
+    for(int i=0;i<9;i++){
+        if(i==3 || i==6){
+            printf("\n---------------------\n");
+        }else{
+            printf("\n");
+        }
+        for(int j=0;j<9;j++){
+            if(j == 2 || j == 5){
+                printf("%d | ",tabuleiro[i][j]);
+            }else{
+                printf("%d ",tabuleiro[i][j]);
+            }
+        }
+    }
 }
+
 void menu(){
     printf("========== S U D O K U ==========\n");
     printf("1-Mostrar tabuleiro");
@@ -64,6 +99,7 @@ void menu(){
     printf("===============================\n==");
     printf("Digite a opcao desejada: ");
 }
+
 int main(){
 
     int opcao;
@@ -72,7 +108,7 @@ int main(){
 
     switch(opcao){
         case 1:
-        incializarTabuleiro();
+        mostrarTabuleiro();
         break;
         
         case 2:
