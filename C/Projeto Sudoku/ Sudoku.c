@@ -45,13 +45,19 @@ int sairJogo(){
 }
 
 void ajuda(){
-
+    printf("Não repetir números na linha.\n");
+    printf("Não repetir números na coluna.\n");
+    printf("Não repetir números no bloco 3x3.\n");
+    printf("Complete todos os espaços para vencer.\n");
 }
 
 int reiniciar(){
 
 }
 
+int progresso(){
+
+}
 
 void estatisticasJogador(jogador player){
 
@@ -91,12 +97,13 @@ void mostrarTabuleiro(int tabuleiroSudoku[9][9]){
 
 void menu(){
     printf("========== S U D O K U ===========\n");
-    printf("1-Mostrar tabuleiro");
+    printf("1-Mostrar tabuleiro\n");
     printf("2-Fazer jogada\n");
     printf("3-Estatisticas");
-    printf("4-Reiniciar \n");
-    printf("5-Ajuda\n");
-    printf("6-Sair\n");
+    printf("4-Progresso\n");
+    printf("5-Reiniciar \n");
+    printf("6-Ajuda\n");
+    printf("7-Sair\n");
     printf("==================================\n");
     printf("Digite a opcao desejada: ");
 }
@@ -143,14 +150,18 @@ int main(){
         break;
 
         case 4:
-        reiniciar();
+        progresso();
         break;
 
         case 5:
-        ajuda();
+        reiniciar();
         break;
 
         case 6:
+        ajuda();
+        break;
+
+        case 7:
         sairJogo();
         break;
 
