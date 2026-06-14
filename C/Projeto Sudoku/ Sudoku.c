@@ -146,7 +146,7 @@ int main(){
         break;
 
         case 3:
-        estatisticasJogador();
+        estatisticasJogador(player);
         break;
 
         case 4:
