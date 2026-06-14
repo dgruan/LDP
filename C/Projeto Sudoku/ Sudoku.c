@@ -1,8 +1,6 @@
-#include <stdio.h>
-
 /* lista de funcoes: menu, para apresentar as opcoes e retornar a escolha do usuario
 mostrarTabuleiro, imprimir a matriz 9x9
-inicializarTabuleiro, carregar o sudoku inicial com alguns preenchidos e outros vazios
+inicializarTabuleiro, carregar o sudoku inicial com alguns preenchidos e outros vazios  PRONTA 
 fazerJogada, que vai pedir a linha, a coluna, e o número da jogada
 verificarLinha, que verifica se o numero já existe naquela linha
 verificarColuna, que verifica se o numero ja existe naquela coluna
@@ -12,26 +10,15 @@ verificarVitoria, que verifica se ainda tem posicoes vazias
 reiniciarJogo, que volta ao estado inicial
 jogador, que mostra dados do jogador */
 
-int jogador(){
-    struct jogador{
-        char nome[100];
-        int jogadas;
-        int erros;
-    };
-    return jogador;
-}
+#include <stdio.h>
+#include <string.h>
 
-int sairJogo(){
+typedef struct{
+    char nome[100];
+    int jogadas;
+    int erros;
+}jogador;
 
-}
-
-void ajuda(){
-
-}
-
-int reiniciar(){
-
-}
 
 int verificarVitoria(){
 
@@ -53,11 +40,70 @@ int verificarLinha(){
 
 }
 
-int jogada(){
+int sairJogo(){
 
 }
 
-mostrarTabuleiro(){
+void ajuda(){
+
+}
+
+int reiniciar(){
+
+}
+
+
+void estatisticasJogador(jogador player){
+
+    printf("Nome do jogador: %s",player.nome);
+    printf("Total de jogadas: %d",player.jogadas);
+    printf("Total de erros do jogador: %d",player.erros);
+}
+
+void jogada(int tabuleiroSudoku[9][9]){
+    int linha, coluna, numeroJogada;
+    printf("Linha: ");
+    scanf("%d",&linha);
+    printf("Coluna: ");
+    scanf("%d",&coluna);
+    printf("Numero que voce deseja inserir: ");
+    scanf("%d",&numeroJogada);
+    tabuleiroSudoku[linha][coluna] = numeroJogada;
+    
+}
+
+void mostrarTabuleiro(int tabuleiroSudoku[9][9]){
+    for(int i=0;i<9;i++){
+        if(i==3 || i==6){
+            printf("\n---------------------\n");
+        }else{
+            printf("\n");
+        }
+        for(int j=0;j<9;j++){
+            if(j == 2 || j == 5){
+                printf("%d | ",tabuleiroSudoku[i][j]);
+            }else{
+                printf("%d ",tabuleiroSudoku[i][j]);
+            }
+        }
+    }
+}
+
+void menu(){
+    printf("========== S U D O K U ===========\n");
+    printf("1-Mostrar tabuleiro");
+    printf("2-Fazer jogada\n");
+    printf("3-Estatisticas");
+    printf("4-Reiniciar \n");
+    printf("5-Ajuda\n");
+    printf("6-Sair\n");
+    printf("==================================\n");
+    printf("Digite a opcao desejada: ");
+}
+
+int main(){
+
+    int opcao;
     int tabuleiro[9][9] = {
     {5,3,0,0,7,0,0,0,0},
     {6,0,0,1,9,5,0,0,0},
@@ -71,44 +117,21 @@ mostrarTabuleiro(){
     {0,0,0,4,1,9,0,0,5},
     {0,0,0,0,8,0,0,7,9} 
 };
-    for(int i=0;i<9;i++){
-        if(i==3 || i==6){
-            printf("\n---------------------\n");
-        }else{
-            printf("\n");
-        }
-        for(int j=0;j<9;j++){
-            if(j == 2 || j == 5){
-                printf("%d | ",tabuleiro[i][j]);
-            }else{
-                printf("%d ",tabuleiro[i][j]);
-            }
-        }
-    }
-}
+    jogador player;
+    char nomeJogador[100];
 
-void menu(){
-    printf("========== S U D O K U ==========\n");
-    printf("1-Mostrar tabuleiro");
-    printf("2-Fazer jogada\n");
-    printf("3-Verificar progresso\n");
-    printf("4-Estatisticas");
-    printf("5-Reiniciar \n");
-    printf("6-Ajuda\n");
-    printf("7-Sair\n");
-    printf("===============================\n==");
-    printf("Digite a opcao desejada: ");
-}
-
-int main(){
-
-    int opcao;
-    menu();
-    scanf("%d",&opcao);
-
-    switch(opcao){
+    printf("Digite o seu nome: ");
+    scanf("%s",nomeJogador);
+    strcpy(player.nome, nomeJogador);
+    player.jogadas = 0;
+    player.erros = 0;
+    
+    do{
+        menu();
+        scanf("%d",&opcao);
+        switch(opcao){
         case 1:
-        mostrarTabuleiro();
+        mostrarTabuleiro(tabuleiro);
         break;
         
         case 2:
@@ -116,24 +139,25 @@ int main(){
         break;
 
         case 3:
-
+        estatisticasJogador();
         break;
 
         case 4:
-        jogador();
-        break;
-
-        case 5:
         reiniciar();
         break;
 
-        case 6:
+        case 5:
         ajuda();
         break;
 
-        case 7:
+        case 6:
         sairJogo();
         break;
+
+        default:
+        printf("Opcao invalida!\n");
     }
+    }while(opcao != 6);
+
     return 0;
 }
