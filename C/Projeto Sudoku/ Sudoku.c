@@ -51,12 +51,19 @@ void ajuda(){
     printf("Complete todos os espaços para vencer.\n");
 }
 
-int reiniciar(){
-
+int reiniciar(int tabuleiroSudoku[9][9]){
+    int tabuleiroInicial[9][9];
+    
+    for(int i=0;i<9;i++){
+        for(int j=0;j<9;j++){
+            tabuleiroInicial[i][j] = tabuleiroSudoku[i][j];
+        }
+    }
+    return tabuleiroInicial;
 }
 
-int progresso(){
-
+int progresso(int tabuleiroSudoku[9][9]){
+    
 }
 
 void estatisticasJogador(jogador player){
