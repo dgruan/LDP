@@ -40,8 +40,8 @@ int verificarLinha(){
 
 }
 
-int sairJogo(){
-
+void sairJogo(){
+    printf("Saindo...");
 }
 
 void ajuda(){
@@ -175,7 +175,7 @@ int main(){
         default:
         printf("Opcao invalida!\n");
     }
-    }while(opcao != 6);
+    }while(opcao != 7);
 
     return 0;
 }
