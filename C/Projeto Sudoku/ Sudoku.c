@@ -1,15 +1,3 @@
-/* lista de funcoes: menu, para apresentar as opcoes e retornar a escolha do usuario
-mostrarTabuleiro, imprimir a matriz 9x9
-inicializarTabuleiro, carregar o sudoku inicial com alguns preenchidos e outros vazios  PRONTA 
-fazerJogada, que vai pedir a linha, a coluna, e o número da jogada
-verificarLinha, que verifica se o numero já existe naquela linha
-verificarColuna, que verifica se o numero ja existe naquela coluna
-verificarBloco, que verifica se o bloco 3x3
-jogadaValida, que verifica a linha, a coluna e o bloco
-verificarVitoria, que verifica se ainda tem posicoes vazias
-reiniciarJogo, que volta ao estado inicial
-jogador, que mostra dados do jogador */
-
 #include <stdio.h>
 #include <string.h>
 
@@ -51,12 +39,10 @@ void ajuda(){
     printf("Complete todos os espaços para vencer.\n");
 }
 
-int reiniciar(int tabuleiroSudoku[9][9]){
-    int tabuleiroInicial[9][9];
-    
+int reiniciar(int tabuleiro[9][9], int tabuleiroInicial[9][9]){
     for(int i=0;i<9;i++){
         for(int j=0;j<9;j++){
-            tabuleiroInicial[i][j] = tabuleiroSudoku[i][j];
+            tabuleiroInicial[i][j] = tabuleiro[i][j];
         }
     }
     return tabuleiroInicial;
@@ -117,16 +103,14 @@ void menu(){
 
 int main(){
 
-    int opcao;
+    int opcao, tabuleiroInicial[9][9];
     int tabuleiro[9][9] = {
     {5,3,0,0,7,0,0,0,0},
     {6,0,0,1,9,5,0,0,0},
     {0,9,8,0,0,0,0,6,0},
-
     {8,0,0,0,6,0,0,0,3},
     {4,0,0,8,0,3,0,0,1},
     {7,0,0,0,2,0,0,0,6},
-
     {0,6,0,0,0,0,2,8,0},
     {0,0,0,4,1,9,0,0,5},
     {0,0,0,0,8,0,0,7,9} 
@@ -161,7 +145,7 @@ int main(){
         break;
 
         case 5:
-        reiniciar();
+        reiniciar(tabuleiro, tabuleiroInicial);
         break;
 
         case 6:
