@@ -7,7 +7,6 @@ typedef struct{
     int erros;
 }jogador;
 
-
 int verificarVitoria(){
 
 }
@@ -20,8 +19,12 @@ int verificarBloco(){
 
 }
 
-int verificarColuna(){
-
+int verificarColuna(int tabuleiro[9][9){
+    for(int i=0;i<9;i++){
+        for(int j=0;j<9;j++){
+            
+        }
+    }
 }
 
 int verificarLinha(){
@@ -39,13 +42,13 @@ void ajuda(){
     printf("Complete todos os espaços para vencer.\n");
 }
 
-int reiniciar(int tabuleiro[9][9], int tabuleiroInicial[9][9]){
+void reiniciar(int tabuleiro[9][9], int tabuleiroInicial[9][9]){
     for(int i=0;i<9;i++){
         for(int j=0;j<9;j++){
-            tabuleiroInicial[i][j] = tabuleiro[i][j];
+            tabuleiro[i][j] = tabuleiroInicial[i][j];
         }
     }
-    return tabuleiroInicial;
+    printf("O tabuleiro foi reiniciado!");
 }
 
 int progresso(int tabuleiroSudoku[9][9]){
@@ -115,6 +118,14 @@ int main(){
     {0,0,0,4,1,9,0,0,5},
     {0,0,0,0,8,0,0,7,9} 
 };
+    
+     //copiar tabuleiro p/ reiniciar
+     for(int i=0;i<9;i++){
+        for(int j=0;j<9;j++){
+            tabuleiroInicial[i][j] = tabuleiro[i][j];
+        }
+    }
+    
     jogador player;
     char nomeJogador[100];
 
