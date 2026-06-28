@@ -19,7 +19,7 @@ int verificarBloco(){
 
 }
 
-int verificarColuna(int tabuleiro[9][9){
+int verificarColuna(int tabuleiro[9][9]){
     for(int i=0;i<9;i++){
         for(int j=0;j<9;j++){
             
@@ -51,8 +51,19 @@ void reiniciar(int tabuleiro[9][9], int tabuleiroInicial[9][9]){
     printf("O tabuleiro foi reiniciado!");
 }
 
-int progresso(int tabuleiroSudoku[9][9]){
-    
+void progresso(int tabuleiroSudoku[9][9]){
+    int casasVazias = 0, casasPreenchidas = 0;
+    for(int i=0;i<9;i++){
+        for(int j=0;j<9;j++){
+            if(tabuleiroSudoku[i][j] == 0){
+                casasVazias++;
+            }else{
+                casasPreenchidas++;
+            }
+        }
+    }
+    printf("No tabuleiro, %d casas estao preenchidas.\n",casasPreenchidas);
+    printf("Faltam %d casas.\n",casasVazias);
 }
 
 void estatisticasJogador(jogador player){
@@ -62,16 +73,36 @@ void estatisticasJogador(jogador player){
     printf("Total de erros do jogador: %d",player.erros);
 }
 
-void jogada(int tabuleiroSudoku[9][9]){
+void jogada(int tabuleiroSudoku[9][9], jogador *player){
     int linha, coluna, numeroJogada;
-    printf("Linha: ");
-    scanf("%d",&linha);
-    printf("Coluna: ");
-    scanf("%d",&coluna);
-    printf("Numero que voce deseja inserir: ");
-    scanf("%d",&numeroJogada);
+
+    do{
+        printf("Linha: ");
+        scanf("%d",&linha);
+
+        printf("Coluna: ");
+        scanf("%d",&coluna);
+
+        if(linha < 0 || linha > 8 || coluna < 0 || coluna > 8){
+            printf("Posicao invalida!\n");
+        }
+        else if(tabuleiroSudoku[linha][coluna] != 0){
+            printf("Essa posicao ja esta preenchida!\n");
+        }
+    }while(linha < 0 || linha > 8 || coluna < 0 || coluna > 8 || tabuleiroSudoku[linha][coluna] != 0);
+
+    do{
+        printf("Numero que voce deseja inserir: ");
+        scanf("%d",&numeroJogada);
+
+        if(numeroJogada < 1 || numeroJogada > 9){
+            printf("Numero invalido!\n");
+            player->erros++;
+        }
+    }while(numeroJogada < 1 || numeroJogada > 9);
+
     tabuleiroSudoku[linha][coluna] = numeroJogada;
-    
+    player->jogadas++;
 }
 
 void mostrarTabuleiro(int tabuleiroSudoku[9][9]){
@@ -118,7 +149,6 @@ int main(){
     {0,0,0,4,1,9,0,0,5},
     {0,0,0,0,8,0,0,7,9} 
 };
-    
      //copiar tabuleiro p/ reiniciar
      for(int i=0;i<9;i++){
         for(int j=0;j<9;j++){
@@ -144,7 +174,7 @@ int main(){
         break;
         
         case 2:
-        jogada();
+        jogada(tabuleiro, &player);
         break;
 
         case 3:
