@@ -7,23 +7,13 @@ typedef struct{
     int erros;
 }jogador;
 
-int verificarVitoria(){
-
-}
-
-int jogadaValida(){
-
-}
-
-int verificarBloco(int tabuleiroSudoku[9][9], int linha, int coluna, int numero){
-    int linhaInicio, colunaInicio;
-
-    linhaInicio = (linha / 3) * 3;
-    colunaInicio = (coluna / 3) * 3;
-
-    if(linhaInicio >= 0 && linhaInicio <= 2){
-
+int verificarLinha(int tabuleiroSudoku[9][9], int linha, int numero){ // nº igual
+    for(int i=0;i<9;i++){
+        if(tabuleiroSudoku[linha][i] ==  numero){
+            return 0;
+        }
     }
+return 1;
 }
 
 int verificarColuna(int tabuleiroSudoku[9][9], int coluna, int numero){ // nº igual
@@ -35,55 +25,32 @@ int verificarColuna(int tabuleiroSudoku[9][9], int coluna, int numero){ // nº i
 return 1;
 }
 
-int verificarLinha(int tabuleiroSudoku[9][9], int linha, int numero){ // nº igual
-    for(int i=0;i<9;i++){
-        if(tabuleiroSudoku[linha][i] ==  numero){
-            return 0;
-        }
-    }
-return 1;
-}
+int verificarBloco(int tabuleiroSudoku[9][9], int linha, int coluna, int numero){
+    int linhaInicio, colunaInicio;
 
-void sairJogo(){
-    printf("Saindo...");
-}
+    //valor inicial linha e coluna
+    linhaInicio = (linha / 3) * 3;
+    colunaInicio = (coluna / 3) * 3;
 
-void ajuda(){
-    printf("Não repetir números na linha.\n");
-    printf("Não repetir números na coluna.\n");
-    printf("Não repetir números no bloco 3x3.\n");
-    printf("Complete todos os espaços para vencer.\n");
-}
-
-void reiniciar(int tabuleiro[9][9], int tabuleiroInicial[9][9]){
-    for(int i=0;i<9;i++){
-        for(int j=0;j<9;j++){
-            tabuleiro[i][j] = tabuleiroInicial[i][j];
-        }
-    }
-    printf("O tabuleiro foi reiniciado!");
-}
-
-void progresso(int tabuleiroSudoku[9][9]){
-    int casasVazias = 0, casasPreenchidas = 0;
-    for(int i=0;i<9;i++){
-        for(int j=0;j<9;j++){
-            if(tabuleiroSudoku[i][j] == 0){
-                casasVazias++;
-            }else{
-                casasPreenchidas++;
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            if(tabuleiroSudoku[linhaInicio+i][colunaInicio+j] == numero){
+                return 0;
             }
         }
     }
-    printf("No tabuleiro, %d casas estao preenchidas.\n",casasPreenchidas);
-    printf("Faltam %d casas.\n",casasVazias);
+    return 1;
 }
 
-void estatisticasJogador(jogador player){
+int jogadaValida(int tabuleiroSudoku[9][9], int linha, int coluna, int numero, jogador *player){
 
-    printf("Nome do jogador: %s\n",player.nome);
-    printf("Total de jogadas: %d\n",player.jogadas);
-    printf("Total de erros do jogador: %d\n",player.erros);
+    if(verificarLinha(tabuleiroSudoku, linha, numero) && verificarColuna(tabuleiroSudoku, coluna, numero) 
+    && verificarBloco(tabuleiroSudoku, linha, coluna, numero)){
+        return 1;
+    }else{
+        player->erros++;
+        return 0;
+    }
 }
 
 void jogada(int tabuleiroSudoku[9][9], jogador *player){
@@ -101,6 +68,7 @@ void jogada(int tabuleiroSudoku[9][9], jogador *player){
         }
         else if(tabuleiroSudoku[linha][coluna] != 0){
             printf("Essa posicao ja esta preenchida!\n");
+            player->erros++;
         }
     }while(linha < 0 || linha > 8 || coluna < 0 || coluna > 8 || tabuleiroSudoku[linha][coluna] != 0);
 
@@ -110,12 +78,30 @@ void jogada(int tabuleiroSudoku[9][9], jogador *player){
 
         if(numeroJogada < 1 || numeroJogada > 9){
             printf("Numero invalido!\n");
-            player->erros++;
         }
     }while(numeroJogada < 1 || numeroJogada > 9);
 
     tabuleiroSudoku[linha][coluna] = numeroJogada;
     player->jogadas++;
+}
+
+int verificarVitoria(){
+    
+}
+
+void progresso(int tabuleiroSudoku[9][9]){
+    int casasVazias = 0, casasPreenchidas = 0;
+    for(int i=0;i<9;i++){
+        for(int j=0;j<9;j++){
+            if(tabuleiroSudoku[i][j] == 0){
+                casasVazias++;
+            }else{
+                casasPreenchidas++;
+            }
+        }
+    }
+    printf("No tabuleiro, %d casas estao preenchidas.\n",casasPreenchidas);
+    printf("Faltam %d casas.\n",casasVazias);
 }
 
 void mostrarTabuleiro(int tabuleiroSudoku[9][9]){
@@ -135,6 +121,15 @@ void mostrarTabuleiro(int tabuleiroSudoku[9][9]){
     }
 }
 
+void reiniciar(int tabuleiro[9][9], int tabuleiroInicial[9][9]){
+    for(int i=0;i<9;i++){
+        for(int j=0;j<9;j++){
+            tabuleiro[i][j] = tabuleiroInicial[i][j];
+        }
+    }
+    printf("O tabuleiro foi reiniciado!");
+}
+
 void menu(){
     printf("\n========== S U D O K U ===========\n");
     printf("1-Mostrar tabuleiro\n");
@@ -146,6 +141,24 @@ void menu(){
     printf("7-Sair\n");
     printf("==================================\n");
     printf("Digite a opcao desejada: ");
+}
+
+void ajuda(){
+    printf("Não repetir números na linha.\n");
+    printf("Não repetir números na coluna.\n");
+    printf("Não repetir números no bloco 3x3.\n");
+    printf("Complete todos os espaços para vencer.\n");
+}
+
+void estatisticasJogador(jogador player){
+
+    printf("Nome do jogador: %s\n",player.nome);
+    printf("Total de jogadas: %d\n",player.jogadas);
+    printf("Total de erros do jogador: %d\n",player.erros);
+}
+
+void sairJogo(){
+    printf("Saindo...\n");
 }
 
 int main(){
