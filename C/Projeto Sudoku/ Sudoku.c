@@ -85,8 +85,15 @@ void jogada(int tabuleiroSudoku[9][9], jogador *player){
     player->jogadas++;
 }
 
-int verificarVitoria(){
-    
+int verificarVitoria(int tabuleiroSudoku[9][9]){
+    for(int i=0;i<9;i++){
+        for(int j=0;j<9;j++){
+            if(tabuleiroSudoku[i][j] == 0){
+                return 0;
+            }
+        }
+    }
+    return 1;
 }
 
 void progresso(int tabuleiroSudoku[9][9]){
