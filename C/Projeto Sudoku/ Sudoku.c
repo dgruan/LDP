@@ -81,8 +81,12 @@ void jogada(int tabuleiroSudoku[9][9], jogador *player){
         }
     }while(numeroJogada < 1 || numeroJogada > 9);
 
-    tabuleiroSudoku[linha][coluna] = numeroJogada;
-    player->jogadas++;
+    if(jogadaValida(tabuleiroSudoku, linha, coluna, numeroJogada, player)){
+        tabuleiroSudoku[linha][coluna] = numeroJogada;
+        player->jogadas++;
+    }else{
+        printf("Jogada invalida! Esse numero ja existe nessa linha, coluna ou bloco.\n");
+    }
 }
 
 int verificarVitoria(int tabuleiroSudoku[9][9]){
@@ -208,6 +212,10 @@ int main(){
         
         case 2:
         jogada(tabuleiro, &player);
+
+        if(verificarVitoria(tabuleiro)){
+            printf("Parabens! Voce venceu!\n");
+        }
         break;
 
         case 3:
