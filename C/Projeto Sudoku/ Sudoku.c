@@ -27,8 +27,8 @@ int verificarColuna(int tabuleiro[9][9]){
     }
 }
 
-int verificarLinha(){
-
+int verificarLinha(int tabuleiroSudoku[9][9]){
+    
 }
 
 void sairJogo(){
@@ -68,9 +68,9 @@ void progresso(int tabuleiroSudoku[9][9]){
 
 void estatisticasJogador(jogador player){
 
-    printf("Nome do jogador: %s",player.nome);
-    printf("Total de jogadas: %d",player.jogadas);
-    printf("Total de erros do jogador: %d",player.erros);
+    printf("Nome do jogador: %s\n",player.nome);
+    printf("Total de jogadas: %d\n",player.jogadas);
+    printf("Total de erros do jogador: %d\n",player.erros);
 }
 
 void jogada(int tabuleiroSudoku[9][9], jogador *player){
@@ -123,10 +123,10 @@ void mostrarTabuleiro(int tabuleiroSudoku[9][9]){
 }
 
 void menu(){
-    printf("========== S U D O K U ===========\n");
+    printf("\n========== S U D O K U ===========\n");
     printf("1-Mostrar tabuleiro\n");
     printf("2-Fazer jogada\n");
-    printf("3-Estatisticas");
+    printf("3-Estatisticas\n");
     printf("4-Progresso\n");
     printf("5-Reiniciar \n");
     printf("6-Ajuda\n");
@@ -182,7 +182,7 @@ int main(){
         break;
 
         case 4:
-        progresso();
+        progresso(tabuleiro);
         break;
 
         case 5:
