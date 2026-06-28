@@ -15,20 +15,33 @@ int jogadaValida(){
 
 }
 
-int verificarBloco(){
+int verificarBloco(int tabuleiroSudoku[9][9], int linha, int coluna, int numero){
+    int linhaInicio, colunaInicio;
 
-}
+    linhaInicio = (linha / 3) * 3;
+    colunaInicio = (coluna / 3) * 3;
 
-int verificarColuna(int tabuleiro[9][9]){
-    for(int i=0;i<9;i++){
-        for(int j=0;j<9;j++){
-            
-        }
+    if(linhaInicio >= 0 && linhaInicio <= 2){
+
     }
 }
 
-int verificarLinha(int tabuleiroSudoku[9][9]){
-    
+int verificarColuna(int tabuleiroSudoku[9][9], int coluna, int numero){ // nº igual
+    for(int i=0;i<9;i++){
+        if(tabuleiroSudoku[i][coluna] == numero){
+            return 0;
+        }
+    }
+return 1;
+}
+
+int verificarLinha(int tabuleiroSudoku[9][9], int linha, int numero){ // nº igual
+    for(int i=0;i<9;i++){
+        if(tabuleiroSudoku[linha][i] ==  numero){
+            return 0;
+        }
+    }
+return 1;
 }
 
 void sairJogo(){
